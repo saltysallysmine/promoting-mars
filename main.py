@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, render_template
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'just_dance_dara_duru'
@@ -23,14 +23,13 @@ def promotion():
     </br>Присоединяйся!<h2>'''
 
 
-
-@app.route('/image_mars')
+@app.route('/promotion_image')
 def mars_greeting():
-    picture_url = url_for('static', filename='img/mars.jpg')
-    return f"""
-            <img src={picture_url} alt="The greatest planet on Earth :)">
-            <h2>Вот она какая, красная планета!</h2>
-        """
+    html_keys = {
+        'picture_url': url_for('static', filename='img/mars.jpg'),
+        'css_url': url_for('static', filename='css/style.css')
+    }
+    return render_template('index.html', **html_keys)
 
 
 if __name__ == "__main__":
