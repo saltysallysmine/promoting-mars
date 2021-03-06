@@ -32,5 +32,38 @@ def mars_greeting():
     return render_template('index.html', **html_keys)
 
 
+@app.route('/astronaut_selection', methods=['POST', 'GET'])
+def astronaut_selection():
+    html_keys = {
+        'professions': [
+            "инженер-исследователь",
+            "пилот",
+            "строитель",
+            "экзобиолог",
+            "врач",
+            "инженер по терраформированию",
+            "климатолог",
+            "специалист по радиационной защите",
+            "астрогеолог",
+            "гляциолог",
+            "инженер жизнеобеспечения",
+            "метеоролог",
+            "оператор марсохода",
+            "киберинженер",
+            "штурман",
+            "пилот дронов"
+        ],
+        'education_variants': [
+            'Начальное общее образование',
+            'Основное общее образование',
+            'Среднее общее образование',
+            'Среднее профессиональное образование',
+            'Высшее образование'
+        ],
+        'css_url': url_for('static', filename='css/registration styles.css')
+    }
+    return render_template('registration form.html', **html_keys)
+
+
 if __name__ == "__main__":
     app.run(port=8080, host='127.0.0.1')
