@@ -1,4 +1,6 @@
-from flask import Flask, url_for, render_template
+from flask import Flask, url_for, render_template, request
+from collections import namedtuple
+from random import sample
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'just_dance_dara_duru'
@@ -63,6 +65,27 @@ def astronaut_selection():
         'css_url': url_for('static', filename='css/registration styles.css')
     }
     return render_template('registration form.html', **html_keys)
+
+
+@app.route('/choice/<name>')
+def choice(name):
+    Article = namedtuple('Article', ['text', 'color'])
+    ordered_planet_info = [
+        Article('Прекрасная планета!', 'alert alert-dark'),
+        Article('Только бескрайние поля;', 'alert alert-dark'),
+        Article('Человечество тут не властно;', 'alert alert-success'),
+        Article('Максимум пара племен гунганов;', 'alert alert-success'),
+        Article('Здесь царит справедливость и порядок;', 'alert alert-secondary'),
+        Article('Даже не знаю, что может пойти не так;', 'alert alert-secondary'),
+        Article('Отличный выбор!', 'alert alert-warning'),
+        Article('Собирай вещи и в полёт!', 'alert alert-warning')
+    ]
+    html_keys = {
+        'planet_name': name,
+        'css_url': url_for('static', filename='css/choice.css'),
+        'planet_info': sample(ordered_planet_info, k=4)
+    }
+    return render_template('choice.html', **html_keys)
 
 
 if __name__ == "__main__":

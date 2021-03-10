@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href={{ css_url }}>
+    <title>Варианты выбора</title>
+</head>
+<body>
+  <h1>Мое предложение: {{ planet_name }}</h1>
+  <h2>Эта панета близка к Земле;</h2>
+  {% for el in planet_info %}
+    <div class="{{ el.color }}" role="alert">
+      {{ el.text }}
+    </div>
+  {% endfor %}
+</body>
+</html>
