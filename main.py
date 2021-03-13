@@ -88,5 +88,15 @@ def choice(name):
     return render_template('choice.html', **html_keys)
 
 
+@app.route('/results/<nickname>/<int:level>/<float:rating>')
+def results(nickname, level: int, rating: float):
+    html_keys = {
+        'nickname': nickname,
+        'level': level,
+        'rating': rating
+    }
+    return render_template('results.html', **html_keys)
+
+
 if __name__ == "__main__":
     app.run(port=8080, host='127.0.0.1')

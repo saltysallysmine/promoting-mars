@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+  <title>Результаты</title>
+  <style>
+    body {
+      width: 50%;
+      margin: auto;
+      margin-top: 30px;
+      font-size: 20px;
+      text-align: center;
+    }
+    div {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Результаты отбора</h1>
+  <h2>Претендента на участие в миссии {{ nickname }}</h2>
+  <div class="alert alert-success">
+    Поздравляем! Ваш рейтинг после {{ level }} этапа отбора
+  </div>
+  <div class='alert alert-secondary'>
+    составляет {{ rating }}!
+  </div>
+  <div class="alert alert-warning">
+    Желаем удачи!
+  </div>
+</body>
+</html>
