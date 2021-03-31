@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!-- <h1>{{ tag }}</h1> -->
+  {% if tag != "ul" and tag != "ol" %}
+  <div class="alert alert-danger" role="alert">
+    Неверный параметр адресной строки. Побробуйте ul или ol.
+  </div>
+  {% else %}
+    <h4>Список профессий</h4>
+    {% if tag == "ul" %}
+      <ul>
+    {% else %}
+      <ol>
+    {% endif %}
+    {% for el in list_of_professions_names %}
+      <li>{{ el }}</li>
+    {% endfor %}
+
+    {% if tag == "ul" %}
+      <ul>
+    {% else %}
+      <ol>
+    {% endif %}
+  {% endif %}
+
+{% endblock %}
