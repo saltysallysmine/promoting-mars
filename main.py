@@ -1,3 +1,5 @@
+# https://github.com/saltysallysmine/promoting-mars.git
+
 from flask import Flask, url_for, render_template, request
 from collections import namedtuple
 from random import sample
@@ -126,6 +128,22 @@ def carousel():
                        for i in range(1, 5)]
     }
     return render_template('carousel.html', **html_keys)
+
+
+@app.route("/training/<profession>")
+def training(profession):
+    html_keys = {
+        "title": "Training"
+    }
+    if 'инженер' in profession.lower() or 'строитель' in profession.lower():
+        html_keys['training_title'] = 'Научные симуляторы'
+        html_keys['image_url'] = url_for('static',
+                                         filename='img/training/simulator.jpg')
+    else:
+        html_keys['training_title'] = 'Универсальная тренировка'
+        html_keys['image_url'] = url_for('static',
+                                         filename='img/training/scheme.jpg')
+    return render_template('training.html', **html_keys)
 
 
 if __name__ == "__main__":
