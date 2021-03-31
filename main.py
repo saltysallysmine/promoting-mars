@@ -1,6 +1,7 @@
 from flask import Flask, url_for, render_template, request
 from collections import namedtuple
 from random import sample
+from os.path import abspath
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'just_dance_dara_duru'
@@ -96,6 +97,36 @@ def results(nickname, level: int, rating: float):
         'rating': rating
     }
     return render_template('results.html', **html_keys)
+
+
+@app.route('/load_photo', methods=['POST', 'GET'])
+def load_photo():
+    html_keys = {
+        'css_url': url_for('static', filename='css/load_photo.css'),
+        'is_picture_sent': False,
+        'picture_url': None
+    }
+
+    if request.method == 'GET':
+        html_keys['is_picture_sent'] = False
+        html_keys['picture_url'] = None
+        return render_template('load_photo.html', **html_keys)
+
+    if request.method == 'POST':
+        html_keys['is_picture_sent'] = True
+        html_keys['picture_url'] = abspath(request.files['sent_image'].filename)
+        return render_template('load_photo.html', **html_keys)
+
+
+@app.route('/carousel')
+def carousel():
+    html_keys = {
+        'css_url': url_for('static', filename='css/carousel.css'),
+        'images_url': [url_for('static',
+                               filename=f'img/carousel_pictures/{i}.jpg')
+                       for i in range(1, 5)]
+    }
+    return render_template('carousel.html', **html_keys)
 
 
 if __name__ == "__main__":

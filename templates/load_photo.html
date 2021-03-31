@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href={{ css_url }}>
+  <title>Отбор астронавтов</title>
+</head>
+<body>
+  <h1>Загрузка фотографии</h1>
+  <h2>для участия в миссии</h2>
+  <form enctype=multipart/form-data method='post'>
+    <div class="form-group">
+      <label for="load-photo-button">Приложите фотографию</label>
+      <input type="file" class="form-control-file" id="load-photo-button" name="sent_image">
+      {% if is_picture_sent %}
+          <img src="{{ picture_url }}" alt="No picture :(">
+      {% endif %}
+      <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Отправить</button>
+    </div>
+  </form>
+</body>
+</html>
