@@ -1,31 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href={{ css_url }}>
-    <title>Колонизация</title>
-</head>
-<body>
-    <h2>Жди нас, Марс!</h2>
-    <img src={{ picture_url }} alt="The greatest planet on Earth :)">
-    <div class="alert alert-dark" role="alert">
-        Человечество вырастает из детства.
-    </div>
-    <div class="alert alert-success" role="alert">
-        Человечеству мала одна планета.
-    </div>
-    <div class="alert alert-secondary" role="alert">
-        Мы сделаем обитаемыми безжизненные пока планеты.
-    </div>
-    <div class="alert alert-warning" role="alert">
-        И начнем с марса.
-    </div>
-    <div class="alert alert-danger" role="alert">
-        Присоединяйся.
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>И на Марсе будут яблони цвести!</h2>    
+{% endblock %}

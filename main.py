@@ -7,14 +7,13 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'just_dance_dara_duru'
 
 
-@app.route('/')
-def mission_name():
-    return f'<h1>Миссия Колонизация Марса</h1>'
-
-
-@app.route('/index')
-def index():
-    return f'<h2>И на Марсе будут яблони цвести!</h2>'
+@app.route('/<title>')
+@app.route('/index/<title>')
+def index(title):
+    html_keys = {
+        'title': title
+    }
+    return render_template('index.html', **html_keys)
 
 
 @app.route('/promotion')
@@ -32,7 +31,7 @@ def mars_greeting():
         'picture_url': url_for('static', filename='img/mars.jpg'),
         'css_url': url_for('static', filename='css/style.css')
     }
-    return render_template('index.html', **html_keys)
+    return render_template('promotion.html', **html_keys)
 
 
 @app.route('/astronaut_selection', methods=['POST', 'GET'])
