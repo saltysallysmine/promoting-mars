@@ -1,15 +1,19 @@
 # https://github.com/saltysallysmine/promoting-mars.git
 
-from flask import Flask, url_for, render_template, request
+from flask import Flask, url_for, render_template, request, redirect
 from collections import namedtuple
 from random import sample
 from os.path import abspath
+from pprint import pprint
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'just_dance_dara_duru'
 
+# filled on "/astronaut_selection"
+user_form_data = {}
 
-@app.route('/<title>')
+
+# @app.route('/<title>')
 @app.route('/index/<title>')
 def index(title):
     html_keys = {
@@ -34,6 +38,20 @@ def mars_greeting():
         'css_url': url_for('static', filename='css/style.css')
     }
     return render_template('promotion.html', **html_keys)
+
+
+@app.route("/answer")
+@app.route("/auto_answer")
+def answer():
+    print(1)
+    global user_form_data
+    # pprint(user_form_data)
+    html_keys = {
+        'title': 'Анкета',
+        'user_form_data': user_form_data,
+        'css_url': url_for('static', filename='/css/auto_answer.css')
+    }
+    return render_template('auto_answer.html', **html_keys)
 
 
 @app.route('/astronaut_selection', methods=['POST', 'GET'])
@@ -66,7 +84,24 @@ def astronaut_selection():
         ],
         'css_url': url_for('static', filename='css/registration styles.css')
     }
-    return render_template('registration form.html', **html_keys)
+
+    if request.method == 'GET':
+        return render_template('registration form.html', **html_keys)
+
+    if request.method == 'POST':
+        global user_form_data
+        user_form_data = {}
+        for key, value in request.form.items():
+            if "accept" not in key:
+                user_form_data[key] = value
+            else:
+                new_key = " ".join(key.split()[1:])
+                user_form_data["profession"] = user_form_data. \
+                    get("profession", [])
+                user_form_data["profession"].append(new_key)
+        # pprint(user_form_data)
+        return redirect('/answer')
+        # return render_template('registration form.html', **html_keys)
 
 
 @app.route('/choice/<name>')
