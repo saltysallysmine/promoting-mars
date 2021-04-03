@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  {% set a = "No data to show" %}
+  {% set a = "No data to show :(" %}
   <h4>Surname: {{ user_form_data.get("surname", a) }}</h4>
   <h4>Name: {{ user_form_data.get("name", a) }}</h4>
   <h4>Education: {{ user_form_data.get("education", a) }}</h4>
@@ -11,14 +11,16 @@
   {% endif %}
   <h4>Profession(s): {{ s }}</h4>
   <h4>Sex: {{ user_form_data.get("sex", a) }}</h4>
-  <h4>Motivation: {{ user_form_data.get("about", a) }}</h4>
+  {% set s = user_form_data.get("about", a) %}
+  {% if s == '' %}
+    {% set s = a %}
+  {% endif %}
+  <h4>Motivation: {{ s }}</h4>
   {% set s = user_form_data.get("StayOnMars", a) %}
-  {% if s != a %}
-    {% if s == "on" %}
-      {% set s = 'Ready!' %}
-    {% else %}
-      {% set s = 'No :(' %}
-    {% endif %}
+  {% if s == "on" %}
+    {% set s = 'Ready!' %}
+  {% else %}
+    {% set s = 'No :(' %}
   {% endif %}
   <h4>Ready to stay on mars?: {{ s }}</h4>
 {% endblock %}
